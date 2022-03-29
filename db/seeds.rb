@@ -7,19 +7,21 @@
 #   Character.create(name: "Luke", movie: movies.first)
 require "csv"
 
-Category.destroy_all
+Customer.destroy_all
 Flower.destroy_all
+Category.destroy_all
+Province.destroy_all
 CartItem.destroy_all
 Order.destroy_all
-Customer.destroy_all
-Province.destroy_all
+
+
 AdminUser.destroy_all
 
 filename = Rails.root.join("db/flowers.csv")
 puts "Loading Flowers from the CSV file: #{filename}"
 
 csv_data = File.read(filename)
-flowers = CSV.parse(csv_data, headers: true, encoding: "utf-8")
+flowers = CSV.parse(csv_data, headers: true, encoding: "ISO-8859-1")
 
 flowers.each do |f|
 
