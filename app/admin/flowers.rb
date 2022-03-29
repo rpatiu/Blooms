@@ -5,7 +5,17 @@ ActiveAdmin.register Flower do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :description, :image, :price, :sale_praice
+  permit_params :name, :description, :image, :price, :sale_praice, :image, :category_id
+
+  form do |f|
+    f.semantic_errors
+    # f.input :category
+    f.inputs
+    f.actions
+    f.inputs do
+      f.input :image, as: :file, hint: f.object.image.present? ? image_tag(f.object.image, width:"200") : ""
+    end
+  end
   #
   # or
   #
