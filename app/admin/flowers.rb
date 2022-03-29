@@ -5,7 +5,7 @@ ActiveAdmin.register Flower do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :name, :description, :image, :price, :sale_praice
+  permit_params :name, :description, :image, :price, :sale_praice
   #
   # or
   #
@@ -14,5 +14,5 @@ ActiveAdmin.register Flower do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
 end
