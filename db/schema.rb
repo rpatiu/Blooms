@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_29_204811) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_29_215720) do
   create_table "abouts", force: :cascade do |t|
     t.text "description"
     t.datetime "created_at", null: false
@@ -106,9 +106,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_29_204811) do
     t.string "name"
     t.text "description"
     t.decimal "price"
-    t.decimal "sale_praice"
+    t.decimal "sale_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "category_id", null: false
+    t.index ["category_id"], name: "index_flowers_on_category_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -134,4 +136,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_29_204811) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "flowers", "categories"
 end
