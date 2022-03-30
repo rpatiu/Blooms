@@ -5,8 +5,8 @@
     <%= link_to f do %>
               <div class="card">
                           <div class="card-image">
-                            <figure class="image is-4by5">
-                              <img src="<%= f.image %>" alt="<%= f.name %>">
+                            <figure class="imagem">
+                              <%= image_tag f.image, alt: f.name %>
                             </figure>
                           </div>
                           <div class="card-content">
