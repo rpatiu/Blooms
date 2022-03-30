@@ -1,6 +1,6 @@
 <div class="block">
-  <div class="is-flex m-5">
-  <% @flowers.each do |f|%>
+  <div class=" m-5">
+  <% @category.flowers.each do |f|%>
     <div class="column is-one-fifth">
     <%= link_to f do %>
               <div class="card">
@@ -28,6 +28,3 @@
   </div>
 </div>
 
-<div class="block">
-  <%= paginate @flowers %>
-</div>

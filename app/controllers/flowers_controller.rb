@@ -1,6 +1,6 @@
 class FlowersController < ApplicationController
   def index
-    @flowers = Flower.all
+    @flowers = Flower.page(params[:page])
   end
 
   def show

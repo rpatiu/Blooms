@@ -1,2 +1,26 @@
-<h1>Flowers#show</h1>
-<p>Find me in app/views/flowers/show.html.erb</p>
+<div class="box">
+  <article class="media has-background-info-light p-2">
+    <div class="media-left">
+      <figure class="image is-128x128">
+        <%= image_tag @flower.image, alt: @flower.name %>
+      </figure>
+    </div>
+    <div class="media-content">
+      <div class="content m-6">
+        <h2 class="title is-1"><%= @flower.name %></h2>
+        <h3 class="subtitle is-5">$<%= @flower.price%></h3>
+        <br>
+        <p><%= @flower.description %></p>
+      </div>
+      <div class="tile is-ancestor m-6">
+
+        <%= link_to @flower.category, class: "box column is-1 mt-6" do %>
+            <p><strong>Category </strong></p>
+            <p><%= @flower.category.name %></p>
+        <% end %>
+
+      </div>
+    </div>
+  </article>
+</div>
+
