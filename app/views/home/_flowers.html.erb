@@ -1,0 +1,33 @@
+<div class="block">
+  <div class="is-flex m-5">
+  <% @flowers.each do |f|%>
+    <div class="column is-one-fifth">
+    <%= link_to f do %>
+              <div class="card">
+                          <div class="card-image">
+                            <figure class="imagem">
+                              <%= image_tag f.image, alt: f.name %>
+                            </figure>
+                          </div>
+                          <div class="card-content">
+                                      <div class="media">
+                                                  <div class="media-left">
+                                                    <p class="title is-4">$<%= f.price %></p>
+                                                  </div>
+                                                    <div class="media-content">
+                                                      <p class="title is-5"><%= f.name %></p>
+                                                      <p class="subtitle is-6"><%= f.category.name %></p>
+                                                    </div>
+                                      </div>
+
+                          </div>
+              </div>
+    <% end %>
+    </div>
+  <% end %>
+  </div>
+</div>
+
+<div class="block">
+  <%= paginate @flowers %>
+</div>
