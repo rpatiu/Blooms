@@ -45,9 +45,10 @@
         <%= form_with(url: search_flowers_path, method: :get, local: true) do %>
         <div class="field has-addons has-addons-right">
           <p class="control">
-          <% categories_array = Category.all.map { |s| [s.name, s.id] }%>
+          <% categories_array = Category.all.map { |s| [s.name.capitalize, s.id]}%>
+          <% categories_array.unshift(["All", "all"])%>
             <span class="select">
-              <%= select_tag(:type, options_for_select(categories_array))%>
+              <%= select_tag(:type, options_for_select(categories_array, selected: "All"))%>
             </span>
           </p>
           <p class="control">
