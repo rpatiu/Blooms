@@ -1,5 +1,7 @@
 class CartItem < ApplicationRecord
-  validates :price, :quantity, presence: true
   belongs_to :order
   belongs_to :flower
+
+  validates :price, :quantity, presence: true
+  validates :price, numericality: { greater_than_or_equal_to: 0}
 end
