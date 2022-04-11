@@ -21,7 +21,7 @@
   <div class="field">
     <% province_array = Province.all.map { |s| [s.name.titleize, s.id]}%>
     <%= f.label :province %><br />
-    <%= f.select :province_id, options_for_select(province_array) %>
+    <%= f.select :province_id, options_for_select(province_array, f.object.province_id) %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
