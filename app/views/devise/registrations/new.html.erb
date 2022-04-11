@@ -19,6 +19,12 @@
   </div>
 
   <div class="field">
+    <% province_array = Province.all.map { |s| [s.name.titleize, s.id]}%>
+    <%= f.label :province %><br />
+    <%= f.select :province_id, options_for_select(province_array) %>
+  </div>
+
+  <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
