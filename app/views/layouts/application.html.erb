@@ -15,12 +15,6 @@
   <body>
     <%= render "layouts/navbar" %>
 
-<%= flash.count %>
-
-<% if flash[:alert] %>
-  <%= flash[:alert]%>
-<% end %>
-
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
     <% end %>
