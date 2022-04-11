@@ -1,10 +1,16 @@
 class FlowersController < ApplicationController
+
+
+  add_breadcrumb " Flowers ", :flowers_path
+
   def index
     @flowers = Flower.page(params[:page])
   end
 
   def show
     @flower = Flower.find(params[:id])
+
+    add_breadcrumb "#{@flower.name}", flower_path
   end
 
   def search
