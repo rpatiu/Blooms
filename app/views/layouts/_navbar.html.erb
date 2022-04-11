@@ -55,7 +55,7 @@
             <%= text_field_tag(:searchwords, nil, class: "input", placeholder: 'ex. Roses, Tulips') %>
           </p>
           <p class="control">
-            <%= submit_tag("Search", class: "button is-warning")%>
+            <%= submit_tag("Search", class: "button is-light")%>
           </p>
         </div>
 
@@ -63,6 +63,20 @@
         </div>
     </div>
 
+    <div>
+    <% if user_signed_in? %>
+      <p>Hi, <strong><%= current_user.email %></strong></p>
+      <div class="is-flex">
+        <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-item' %>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-item'  %>
+      </div>
+    <% else %>
+      <div class="is-flex">
+        <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-item'  %>
+        <%= link_to "Login", new_user_session_path, :class => 'navbar-item'  %>
+      </div>
+    <% end %>
+    </div>
 
   </div>
 </nav>
