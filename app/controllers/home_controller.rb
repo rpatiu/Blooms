@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   def index
     @flowers = Flower.page(params[:page]);
 
-    add_breadcrumb "All", index_path
+    # add_breadcrumb "All", index_path
   end
 
   def sale
