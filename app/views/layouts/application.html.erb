@@ -21,14 +21,15 @@
 
     </nav>
 
-  <p><%= debug session[:shopping_cart] %></p>
+    <% if notice %>
+      <p class="message"><%= notice %></p>
+    <% end %>
 
     <% if notice %>
       <p class="message"><%= notice %></p>
     <% end %>
-    <% if alert %>
-      <p class="message"><%= alert %></p>
-    <% end %>
+
+
 
 
 

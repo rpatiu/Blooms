@@ -30,9 +30,17 @@
               </div>
     <% end %>
                               <div>
-                                <%= form_with url: cart_index_path, method: :post do %>
-                                  <%= hidden_field_tag(:id, f.id) %>
-                                  <%= button_tag 'Add to Cart', class: "button is-info" %>
+
+                                <% if cart.include?(f) %>
+                                  <%= button_to cart_path(f), class: "button is-danger", method: :delete do %>
+                                    Remove from cart
+                                  <% end %>
+                                <% else %>
+                                  <%= form_with url: cart_index_path, method: :post do %>
+                                    <%= hidden_field_tag(:id, f.id) %>
+                                    <%= button_tag 'Add to Cart', class: "button is-info" %>
+                                  <% end %>
+
                                 <% end %>
                               </div>
 

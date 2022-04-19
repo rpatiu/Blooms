@@ -78,5 +78,25 @@
     <% end %>
     </div>
 
+    <div>
+      <%= link_to image_tag("cart.png", width:50), root_path %>
+      <% if cart.present? %>
+          <sup><%= cart.size %></sup>
+      <ul>
+        <li>
+          Cart
+
+          <ul>
+            <% cart.each do |product| %>
+              <li>
+                <%= product.name %> <%= button_to cart_path(product), method: :delete do %> - <% end %>
+              </li>
+            <% end %>
+          </ul>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+
   </div>
 </nav>
