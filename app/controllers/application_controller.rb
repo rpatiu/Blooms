@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
 
   def cart
     Flower.find(session[:shopping_cart])
+
   end
 
 end

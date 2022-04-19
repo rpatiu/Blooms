@@ -24,16 +24,18 @@
                                                       <p class="subtitle is-6"><%= f.category.name %></p>
                                                     </div>
                                       </div>
-                              <div>
-                                <%= form_with url: cart_index_path, method: :post do %>
-                                  <%= hidden_field_tag(:id, product.id) %>
-                                  <%= button_tag 'Add to Cart', class: "button is-info" %>
-                                <% end %>
-                              </div>
+
 
                           </div>
               </div>
     <% end %>
+                              <div>
+                                <%= form_with url: cart_index_path, method: :post do %>
+                                  <%= hidden_field_tag(:id, f.id) %>
+                                  <%= button_tag 'Add to Cart', class: "button is-info" %>
+                                <% end %>
+                              </div>
+
     </div>
   <% end %>
   </div>

@@ -1,7 +1,7 @@
 <div class="block">
   <div class=" m-5">
-  <% @category.flowers.each do |f|%>
-    <div class="column is-one-fifth">
+    <% @category.flowers.each do |f|%>
+     <div class="column is-one-fifth">
     <%= link_to f do %>
               <div class="card">
                           <div class="card-image">
@@ -12,13 +12,24 @@
                           <div class="card-content">
                                       <div class="media">
                                                   <div class="media-left">
+                                                  <% if f.sale_price.present? %>
+                                                    <p class="title is-4 has-text-red">$<%= f.sale_price %></p>
+                                                    <p class="title is-6"><strike>$<%= f.price %></strike></p>
+                                                  <% else %>
                                                     <p class="title is-4">$<%= f.price %></p>
+                                                  <% end %>
                                                   </div>
                                                     <div class="media-content">
                                                       <p class="title is-5"><%= f.name %></p>
                                                       <p class="subtitle is-6"><%= f.category.name %></p>
                                                     </div>
                                       </div>
+                              <div>
+                                <%= form_with url: cart_index_path, method: :post do %>
+                                  <%= hidden_field_tag(:id, f.id) %>
+                                  <%= button_tag 'Add to Cart', class: "button is-info" %>
+                                <% end %>
+                              </div>
 
                           </div>
               </div>
