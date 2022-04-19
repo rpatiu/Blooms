@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
   # before_action :authenticate_user!
 
+  before_action :initialize_session
+  helper_method :cart
+
   add_breadcrumb "Home", :root_path
 
 
@@ -11,4 +14,13 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: attributes)
     devise_parameter_sanitizer.permit(:account_update, keys: attributes)
   end
+
+  def initialize_session
+    session[:shopping_cart] ||= [] #empty array of product IDs
+  end
+
+  def cart
+    Flower.find(session[:shopping_cart])
+  end
+
 end
