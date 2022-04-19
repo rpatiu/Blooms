@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
 
   add_breadcrumb "Home", :root_path
 
-
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def configure_permitted_parameters
