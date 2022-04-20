@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   post "/cart/checkout", to:'cart#checkout'
 
+  resources :orders
   resources :cart, only: [:create, :checkout, :destroy, :index, :update]
   resources :home
   resources :category

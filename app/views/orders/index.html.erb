@@ -1,0 +1,32 @@
+
+<div class="block p-6" style="background-color: #415E7B"><h1 class="title is-1" style="font-family: Dancing Script; color: #F2A19D">Order History</h1></div>
+
+<table class="table m-auto">
+  <thead>
+    <tr>
+      <th>Order Id</th>
+      <th>Subtotal</th>
+      <th>PST</th>
+      <th>GST</th>
+      <th>HST</th>
+      <th>TOTAL</th>
+      <th>STATUS</th>
+      <th>Order Date</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @orders.each do |o|%>
+    <tr>
+      <th><%= o.id %></th>
+      <td><%= number_to_currency(o.subtotal) %></td>
+      <td><%= number_to_currency(o.pst) %></td>
+      <td><%= number_to_currency(o.gst) %></td>
+      <td><%= number_to_currency(o.hst) %></td>
+      <td><%= number_to_currency(o.total) %></td>
+      <td><%= (o.status).upcase %></td>
+      <td><%= o.created_at %></td>
+    </tr>
+  <% end %>
+
+  </tbody>
+</table>
