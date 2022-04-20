@@ -2,12 +2,18 @@
 
 <div class="columns is-desktop">
 
-<div class="column" >
-  <%= render "cart/cartitem" %>
-</div>
+<% if session[:shopping_cart].present? %>
+  <div class="column" >
+    <%= render "cart/cartitem" %>
+  </div>
 
-<div class="column" >
-  <%= render "cart/summary" %>
-</div>
+  <div class="column" >
+    <%= render "cart/summary" %>
+  </div>
+<% else %>
+  <div class="box m-auto">
+    <p> No items in your shopping cart</p>
+ </div>
+<% end %>
 
 </div>
