@@ -1,28 +1,32 @@
-<h2>Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+<div class="box p-6 m-auto" style="width: 50%">
+<h1 class="title is-1 mb-6 has-text-centered" style="font-family: Dancing Script; color: #F2A19D">Log In</h1>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), ) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :email%><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input" %>
   </div>
 
   <div class="field">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.password_field :password, autocomplete: "current-password", class: "input" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
     <div class="field">
-      <%= f.check_box :remember_me %>
+      <%= f.check_box :remember_me, class:"checkbox" %>
       <%= f.label :remember_me %>
     </div>
   <% end %>
 
+  <%= render "devise/shared/links" %>
+
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in", class: "button is-info mt-2", style: "width: 100%" %>
   </div>
 <% end %>
+</div>
 
-<%= render "devise/shared/links" %>
