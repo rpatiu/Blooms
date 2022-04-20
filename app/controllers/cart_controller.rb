@@ -18,7 +18,7 @@ class CartController < ApplicationController
     id = params[:id].to_i
     quantity = params[:quantity].to_i
 
-    if (quantity == 0)
+    if (quantity < 1)
       session[:shopping_cart].delete(id)
     else
       session[:shopping_cart]["#{id}"] = quantity;

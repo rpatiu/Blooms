@@ -1,4 +1,4 @@
-<div class="box p-6 m-auto" style="width: 50%">
+<div class="box p-6 m-auto" style="width: 500px">
 <h1 class="title is-1 mb-6 has-text-centered" style="font-family: Dancing Script; color: #F2A19D">Edit Account</h1>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -21,7 +21,9 @@
   <div class="field">
     <% province_array = Province.all.map { |s| [s.name.titleize, s.id]}%>
     <%= f.label :province %><br />
-    <%= f.select :province_id, options_for_select(province_array, f.object.province_id) %>
+    <span class="select">
+      <%= f.select :province_id, options_for_select(province_array, f.object.province_id)%>
+    </span>
   </div>
   <hr>
 
@@ -60,6 +62,5 @@
 
 <p><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, class: "button is-danger m-1", style: "width: 100%", method: :delete %></p>
 
-<%= link_to "Back", :back %>
 
 </div>

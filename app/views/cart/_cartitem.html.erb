@@ -2,11 +2,11 @@
         <% @cart.each do |flower| %>
         <div class="box p-5">
           <article class="columns is-desktop p-2">
-            <div class="column">
-                <%= image_tag(flower.image, alt: flower.name, style: "width: 200px")%>
+            <div class="column has-text-centered">
+                <%= image_tag(flower.image, alt: flower.name, style: "width: 100%")%>
             </div>
             <div class="column">
-              <div class="content m-1">
+              <div class="content m-1 has-text-centered">
                 <h2 class="title is-4" ><%= flower.name %></h2>
 
                 <% if flower.sale_price.present? %>
@@ -15,35 +15,34 @@
                 <% else %>
                   <h3 class="subtitle is-5">$<%= flower.price%></h3>
                 <% end %>
-                <br>
               </div>
-              <div class="">
-                    <div class="is-flex">
+              <div class="mt-4">
+
                     <%= form_with url: cart_path(flower.id), method: :put do %>
                       <% quantity = session[:shopping_cart]["#{flower.id}"] %>
-                      Quantity: <%= number_field_tag(:quantity, quantity, class: " input m-1") %>
+                      <div class="is-flex is-justify-content-center">
+                        <p class="m-3">Qty: </p><%= number_field_tag(:quantity, quantity, class: " input m-1", style: "width: 50px", min: "0") %>
+                      </div>
                       <%= hidden_field_tag(:id, flower.id) %>
-                      <%= button_tag 'Update', class: "button is-link m-1", style: "width: 100%" %>
+                      <div class="is-flex is-justify-content-center">
+                      <%= button_tag 'Update', class: "button is-link is-responsive mt-4" %>
+                      </div>
                   <% end %>
-                </div>
 
-                                      <div class="card">
 
-                                        <% if cart.include?(flower) %>
-                                          <%= button_to cart_path(flower.id), class: "button is-danger is-responsive m-1", style: "width: 100%", method: :delete do %>
-                                            Remove
-                                          <% end %>
-                                        <% else %>
-                                          <%= form_with url: cart_index_path, method: :post do %>
-                                            <%= hidden_field_tag(:id, flower.id) %>
-                                            <%= button_tag 'Add to Cart', class: "button is-info is-responsive m-1", style: "width: 100%" %>
-                                          <% end %>
 
-                                        <% end %>
-                                      </div>
 
               </div>
             </div>
+            <div class="column is-narrow has-text-right">
+
+                                        <% if cart.include?(flower) %>
+                                          <%= button_to cart_path(flower.id), class: "button is-danger p-3", method: :delete do %>
+                                            x
+                                          <% end %>
+                                        <% end %>
+                                      </div>
+
           </article>
         </div>
 
