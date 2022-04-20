@@ -1,0 +1,63 @@
+<div class="box m-6">
+<% subtotal = 0 %>
+  <div class="field">
+    <label class="label">Order Summary</label>
+    <% @cart.each do |f|%>
+    <div class="control">
+      <p><%= f.name %></p>
+      <p class="has-text-right">
+        <% if f.sale_price.present?
+            price = f.sale_price
+          else
+            price = f.price
+          end %><%= number_to_currency(price) %>
+        <% quantity = session[:shopping_cart]["#{f.id}"]
+        if (quantity > 1) %>
+         x <%= quantity %>
+        <% end %>
+        <% subtotal += price * quantity %>
+      </p>
+    </div>
+    <% end %>
+  </div>
+
+<hr>
+  <% if user_signed_in?
+      province = Province.find(User.find(current_user.id).province_id)
+      pst = province.pst * subtotal
+      gst = province.gst * subtotal
+      hst = province.hst * subtotal
+    else
+      manitoba = Province.where("name == 'Manitoba'").first
+      if (manitoba)
+      pst = manitoba.pst * subtotal
+      gst = manitoba.gst * subtotal
+      hst = manitoba.hst * subtotal
+      end
+    end
+    %>
+  <div class="field">
+    <label class="label">Sub Total: </label>
+    <div class="control">
+      <p class="has-text-right title is-6"><%= number_to_currency(subtotal) %></p>
+    </div>
+    <p class="has-text-right">GST: &nbsp &nbsp &nbsp &nbsp &nbsp<%= number_to_currency(gst)%> </p>
+    <p class="has-text-right">HST: &nbsp &nbsp &nbsp &nbsp &nbsp<%= number_to_currency(hst)%> </p>
+    <p class="has-text-right">PST: &nbsp &nbsp &nbsp &nbsp &nbsp<%= number_to_currency(pst)%> </p>
+<hr>
+  <label class="label"> Total: </label>
+    <div class="control">
+      <p class="has-text-right title is-4">$<%= total = subtotal + gst + hst + pst %></p>
+    </div>
+
+  </div>
+
+<%= form_with url: cart_checkout_path, method: :post do %>
+  <%= hidden_field_tag(:subtotal, subtotal) %>
+  <%= hidden_field_tag(:total, total)%>
+  <%= hidden_field_tag(:hst, hst)%>
+  <%= hidden_field_tag(:gst, gst)%>
+  <%= hidden_field_tag(:pst, pst)%>
+  <%= button_tag 'Checkout', class: "button is-primary", style: "width: 100%" %>
+<% end %>
+</div>

@@ -1,23 +1,43 @@
-<div class="box">
-  <article class="media has-background-info-light p-2">
-    <div class="media-left">
-      <figure class="image is-128x128">
-        <%= image_tag @flower.image, alt: @flower.name %>
-      </figure>
+<div class="block p-5">
+  <article class="columns is-desktop p-2">
+    <div class="column">
+        <%= image_tag(@flower.image, alt: @flower.name, style: "width: 800px")%>
     </div>
-    <div class="media-content">
+    <div class="column">
       <div class="content m-6">
-        <h2 class="title is-1"><%= @flower.name %></h2>
-        <h3 class="subtitle is-5">$<%= @flower.price%></h3>
+        <h2 class="title is-1" style="font-family: Dancing Script"><%= @flower.name %></h2>
+
+        <% if @flower.sale_price.present? %>
+          <h3 class="subtitle is-4">$<%= @flower.sale_price%></h3>
+          <h3 class="subtitle is-6"><strike>$<%= @flower.price%></strike></h3>
+        <% else %>
+          <h3 class="subtitle is-4">$<%= @flower.price%></h3>
+        <% end %>
         <br>
         <p><%= @flower.description %></p>
       </div>
-      <div class="tile is-ancestor m-6">
+      <div class=" m-6">
 
-        <%= link_to @flower.category, class: "box column is-1 mt-6" do %>
+        <%= link_to @flower.category, class: "box column" do %>
             <p><strong>Category </strong></p>
-            <p><%= @flower.category.name %></p>
+            <p><%= (@flower.category.name).titleize %></p>
         <% end %>
+
+
+                              <div class="card">
+
+                                <% if cart.include?(@flower) %>
+                                  <%= button_to cart_path(@flower.id), class: "button is-danger", style: "width: 100%", method: :delete do %>
+                                    Remove from cart
+                                  <% end %>
+                                <% else %>
+                                  <%= form_with url: cart_index_path, method: :post do %>
+                                    <%= hidden_field_tag(:id, @flower.id) %>
+                                    <%= button_tag 'Add to Cart', class: "button is-info is-responsive", style: "width: 100%" %>
+                                  <% end %>
+
+                                <% end %>
+                              </div>
 
       </div>
     </div>
