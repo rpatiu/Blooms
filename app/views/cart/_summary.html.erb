@@ -47,9 +47,8 @@
 <hr>
   <label class="label"> Total: </label>
     <div class="control">
-      <p class="has-text-right title is-4">$<%= total = subtotal + gst + hst + pst %></p>
+      <p class="has-text-right title is-4"><%= number_to_currency(total = subtotal + gst + hst + pst) %></p>
     </div>
-
   </div>
 
 <%= form_with url: cart_checkout_path, method: :post do %>
