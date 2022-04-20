@@ -9,7 +9,7 @@
 
         <% if @flower.sale_price.present? %>
           <h3 class="subtitle is-4">$<%= @flower.sale_price%></h3>
-          <h3 class="subtitle is-6"><strike>$<%= @flower.price%></strike></h3>
+          <h3 class="subtitle is-6"  style="text-decoration: line-through">$<%= @flower.price%></h3>
         <% else %>
           <h3 class="subtitle is-4">$<%= @flower.price%></h3>
         <% end %>

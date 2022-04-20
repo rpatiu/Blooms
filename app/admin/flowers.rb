@@ -13,7 +13,7 @@ ActiveAdmin.register Flower do
     f.inputs
     f.actions
     f.inputs do
-      f.input :image, as: :file, hint: f.object.image.present? ? image_tag(f.object.image, width:"200") : ""
+      f.input :image, as: :file, hint: f.object.image.present? ? image_tag(f.object.image, width:"200", alt: "image") : ""
     end
   end
   #

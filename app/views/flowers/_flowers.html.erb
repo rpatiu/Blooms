@@ -14,7 +14,7 @@
                                                   <div class="media-left">
                                                   <% if f.sale_price.present? %>
                                                     <p class="title is-4" style="color: #FF7575">$<%= f.sale_price %></p>
-                                                    <p class="title is-6" style="color: #FF7575"><strike>$<%= f.price %></strike></p>
+                                                    <p class="title is-6" style="color: #FF7575; text-decoration: line-through">$<%= f.price %></p>
                                                   <% else %>
                                                     <p class="title is-4">$<%= f.price %></p>
                                                   <% end %>
@@ -37,7 +37,7 @@
                                   <% end %>
                                 <% else %>
                                   <%= form_with url: cart_index_path, method: :post do %>
-                                    <%= hidden_field_tag(:id, f.id) %>
+                                    <%= hidden_field_tag :id, f.id %>
                                     <%= button_tag 'Add to Cart', class: "button is-info is-responsive", style: "width: 100%" %>
                                   <% end %>
 

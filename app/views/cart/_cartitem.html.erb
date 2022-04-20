@@ -10,8 +10,8 @@
                 <h2 class="title is-4" ><%= flower.name %></h2>
 
                 <% if flower.sale_price.present? %>
-                  <h3 class="subtitle is-6">$<%= flower.sale_price%></h3>
-                  <h3 class="subtitle is-5"><strike>$<%= flower.price%></strike></h3>
+                  <h3 class="subtitle is-5">$<%= flower.sale_price%></h3>
+                  <h3 class="subtitle is-6" style="text-decoration: line-through">$<%= flower.price%></h3>
                 <% else %>
                   <h3 class="subtitle is-5">$<%= flower.price%></h3>
                 <% end %>
@@ -28,8 +28,6 @@
                       <%= button_tag 'Update', class: "button is-link is-responsive mt-4" %>
                       </div>
                   <% end %>
-
-
 
 
               </div>
