@@ -1,0 +1,89 @@
+<div>
+<% @cart.each do |f| %>
+    <div class="block">
+    <p><%= f.name %></p>
+    <p><%= f.price %></p>
+    <%= form_with url: cart_path(f.id), method: :put do %>
+        <% quantity = session[:shopping_cart]["#{f.id}"] %>
+        <%= number_field_tag(:quantity, quantity, class: "input") %>
+        <%= hidden_field_tag(:id, f.id) %>
+        <%= button_tag 'Update', class: "button is-link" %>
+    <% end %>
+    <%= button_to cart_path(f.id), class: "button is-danger", method: :delete do %>
+                                    Remove from cart
+                                  <% end %>
+    </div>
+<% end %>
+
+
+
+
+</div>
+
+<div>
+
+<div class="box">
+<% subtotal = 0 %>
+  <div class="field">
+    <label class="label">Order Summary</label>
+    <% @cart.each do |f|%>
+    <div class="control">
+      <p><%= f.name %></p>
+      <p>
+        <% if f.sale_price.present?
+            price = f.sale_price
+          else
+            price = f.price
+          end %><%= price %>
+        <% quantity = session[:shopping_cart]["#{f.id}"]
+        if (quantity > 1) %>
+         x <%= quantity%>
+        <% end %> = $<%= price * quantity %>
+        <% subtotal += price * quantity %>
+      </p>
+    </div>
+    <% end %>
+  </div>
+
+
+  <% if user_signed_in?
+      province = Province.find(User.find(current_user.id).province_id)
+      pst = province.pst * subtotal
+      gst = province.gst * subtotal
+      hst = province.hst * subtotal
+    else
+      manitoba = Province.where("name == 'Manitoba'").first
+      if (manitoba)
+      pst = manitoba.pst * subtotal
+      gst = manitoba.gst * subtotal
+      hst = manitoba.hst * subtotal
+      end
+    end
+    %>
+  <div class="field">
+    <label class="label">Sub Total: </label>
+    <div class="control">
+      <p><%= subtotal %></p>
+    </div>
+    <p>GST: <%= gst%> </p>
+    <p>HST: <%= hst%> </p>
+    <p>PST: <%= pst%> </p>
+
+  <label class="label"> Total: </label>
+    <div class="control">
+      <p><%= total = subtotal + gst + hst + pst %></p>
+    </div>
+
+  </div>
+
+<%= form_with url: cart_path, method: :post do %>
+  <%= hidden_field_tag(:subtotal, subtotal) %>
+  <%= hidden_field_tag(:total, total)%>
+  <%= hidden_field_tag(:hst, hst)%>
+  <%= hidden_field_tag(:gst, gst)%>
+  <%= hidden_field_tag(:pst, pst)%>
+  <%= button_tag 'Checkout', class: "button is-primary" %>
+<% end %>
+</div>
+
+</div>

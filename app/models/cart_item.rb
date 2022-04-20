@@ -1,5 +1,5 @@
 class CartItem < ApplicationRecord
-  belongs_to :order
+  belongs_to :order, optional: true
   belongs_to :flower
 
   validates :price, :quantity, presence: true

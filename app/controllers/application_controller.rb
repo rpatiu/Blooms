@@ -15,12 +15,18 @@ class ApplicationController < ActionController::Base
   end
 
   def initialize_session
-    session[:shopping_cart] ||= [] #empty array of product IDs
+    session[:shopping_cart] ||= {} #empty array of product IDs
   end
 
   def cart
-    Flower.find(session[:shopping_cart])
+    Flower.find(session[:shopping_cart].keys)
 
   end
+
+  # def current_user
+  #   if user_signed_in
+
+  #   end
+  # end
 
 end
