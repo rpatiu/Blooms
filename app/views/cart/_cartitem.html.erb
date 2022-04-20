@@ -21,9 +21,9 @@
                     <%= form_with url: cart_path(flower.id), method: :put do %>
                       <% quantity = session[:shopping_cart]["#{flower.id}"] %>
                       <div class="is-flex is-justify-content-center">
-                        <p class="m-3">Qty: </p><%= number_field_tag(:quantity, quantity, class: " input m-1", style: "width: 50px", min: "0") %>
+                        <p class="m-3">Qty: </p><%= number_field_tag(:quantity, quantity, id: flower.id, class: " input m-1", style: "width: 50px", min: "0") %>
                       </div>
-                      <%= hidden_field_tag(:id, flower.id) %>
+                      <%= hidden_field_tag :id, flower.id, :id => Random.rand %>
                       <div class="is-flex is-justify-content-center">
                       <%= button_tag 'Update', class: "button is-link is-responsive mt-4" %>
                       </div>
