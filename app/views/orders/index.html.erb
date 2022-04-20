@@ -17,7 +17,7 @@
   <tbody>
   <% @orders.each do |o|%>
     <tr>
-      <th><%= o.id %></th>
+      <th><%= link_to o.id, item_path(o) %></th>
       <td><%= number_to_currency(o.subtotal) %></td>
       <td><%= number_to_currency(o.pst) %></td>
       <td><%= number_to_currency(o.gst) %></td>

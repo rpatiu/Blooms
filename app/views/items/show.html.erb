@@ -1,0 +1,71 @@
+<div class="block p-6" style="background-color: #415E7B"><h1 class="title is-1" style="font-family: Dancing Script; color: #F2A19D">Order #<%= @order.id %></h1></div>
+
+
+<div class="columns is-desktop" >
+<div class="column">
+  <div class="block ml-5">
+          <% @items.each do |item| %>
+          <div class="box p-5">
+            <article class="columns is-desktop p-2">
+              <div class="column has-text-centered">
+                  <%= image_tag(item.flower.image, alt: item.flower.name, style: "width: 100%")%>
+              </div>
+              <div class="column">
+                <div class="content m-1 has-text-centered">
+                  <h2 class="title is-4" ><%= item.flower.name %></h2>
+                    <h3 class="subtitle is-5">$<%= item.price%></h3>
+                </div>
+
+              </div>
+
+
+            </article>
+          </div>
+
+        <% end %>
+
+</div>
+</div>
+
+
+<div class= "column">
+
+<div class="box m-6">
+  <div class="field">
+    <label class="label">Order Summary</label>
+    <% @items.each do |f|%>
+    <div class="control">
+      <p><%= f.flower.name %></p>
+      <p class="has-text-right">
+        <%= number_to_currency(f.price) %>
+         x <%= f.quantity %>
+      </p>
+    </div>
+    <% end %>
+  </div>
+
+<hr>
+
+  <div class="field">
+    <label class="label">Sub Total: </label>
+    <div class="control">
+      <p class="has-text-right title is-6"><%= number_to_currency(@order.subtotal) %></p>
+    </div>
+    <p class="has-text-right">GST: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%= number_to_currency(@order.gst)%> </p>
+    <p class="has-text-right">HST: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%= number_to_currency(@order.hst)%> </p>
+    <p class="has-text-right">PST: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%= number_to_currency(@order.pst)%> </p>
+<hr>
+  <label class="label"> Total: </label>
+    <div class="control">
+      <p class="has-text-right title is-4"><%= number_to_currency(@order.total) %></p>
+    </div>
+</div>
+
+</div>
+</div>
+
+
+
+
+
+</div>
