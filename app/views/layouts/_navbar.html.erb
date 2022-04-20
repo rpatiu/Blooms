@@ -1,7 +1,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
-      <h1 class="title is-2 has-text-grey-light ">Blooms</h1>
+      <h1 class="title is-1 " style="font-family: Lavishly Yours; color: #7B6986">Blooms</h1>
     </a>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -11,7 +11,8 @@
     </a>
   </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
+
+  <div id="navbarBasicExample" class="navbar-menu is-active">
     <div class="navbar-start">
 
         <%= link_to "Home", root_path, class: "navbar-item" %>
@@ -25,11 +26,14 @@
 
         <div class="navbar-dropdown">
             <%= link_to "Bouquets", category_path(:id => 14), class: "navbar-item" %>
-            <%= link_to "Stems", category_path(:id => 13), class: "navbar-item" %>
-            <%= link_to "Cascade", category_path(:id => 15), class: "navbar-item" %>
-            <%= link_to "Composites", category_path(:id => 17), class: "navbar-item" %>
-            <%= link_to "Pomander", category_path(:id => 16), class: "navbar-item" %>
           <hr class="navbar-divider">
+            <%= link_to "Stems", category_path(:id => 13), class: "navbar-item" %>
+          <hr class="navbar-divider">
+            <%= link_to "Cascade", category_path(:id => 15), class: "navbar-item" %>
+          <hr class="navbar-divider">
+            <%= link_to "Composites", category_path(:id => 17), class: "navbar-item" %>
+          <hr class="navbar-divider">
+            <%= link_to "Pomander", category_path(:id => 16), class: "navbar-item" %>
         </div>
       </div>
 
@@ -40,63 +44,36 @@
     </div>
 
 
-     <div class="navbar-end">
-      <div class="navbar-item">
-        <%= form_with(url: search_flowers_path, method: :get, local: true) do %>
-        <div class="field has-addons has-addons-right">
-          <p class="control">
-          <% categories_array = Category.all.map { |s| [s.name.capitalize, s.id]}%>
-          <% categories_array.unshift(["All", "all"])%>
-            <span class="select">
-              <%= select_tag(:type, options_for_select(categories_array, selected: "All"))%>
-            </span>
-          </p>
-          <p class="control">
-            <%= text_field_tag(:searchwords, nil, class: "input", placeholder: 'ex. Roses, Tulips') %>
-          </p>
-          <p class="control">
-            <%= submit_tag("Search", class: "button is-light")%>
-          </p>
+
+
+     <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          <%= image_tag("account.png", width:23) %>
+        </a>
+      <% if user_signed_in? %>
+
+        <div class="navbar-dropdown">
+          <p class="navbar-item" >Hi, <%= (current_user.name).capitalize %>!</strong></p>
+          <hr class="navbar-divider">
+          <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-item' %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-item'  %>
         </div>
-
-        <% end %>
+      <% else %>
+        <div class="navbar-dropdown">
+          <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-item'  %>
+          <%= link_to "Login", new_user_session_path, :class => 'navbar-item'  %>
         </div>
+      <% end %>
     </div>
 
-    <div>
-    <% if user_signed_in? %>
-      <p>Hi, <strong><%= current_user.email %></strong></p>
-      <div class="is-flex">
-        <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-item' %>
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-item'  %>
-      </div>
-    <% else %>
-      <div class="is-flex">
-        <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-item'  %>
-        <%= link_to "Login", new_user_session_path, :class => 'navbar-item'  %>
-      </div>
-    <% end %>
-    </div>
+      <%= link_to image_tag("cart.png", width:25) , cart_index_path, class: "navbar-item" %>
 
-    <div>
-      <%= link_to image_tag("cart.png", width:50), cart_index_path %>
-      <% if cart.present? %>
-          <sup><%= cart.size %></sup>
-      <ul>
-        <li>
-          Cart
 
-          <ul>
-            <% cart.each do |product| %>
-              <li>
-                <%= product.name %> <%= button_to cart_path(product), method: :delete do %> - <% end %>
-              </li>
-            <% end %>
-          </ul>
-          <% end %>
-        </li>
-      </ul>
-    </div>
+
+
 
   </div>
+
+
 </nav>
+

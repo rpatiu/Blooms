@@ -1,5 +1,14 @@
+<div class="block"> <%=  image_tag("background.jpg", width: "100%", height: "100%")  %></div>
+
+
+<div class="block p-4">
+
+<%= render 'home/template' %>
+
 <%= link_to 'ALL', root_path, class: "button is-light" %>
 <%= link_to 'SALE', sale_path, class: "button is-danger is-light" %>
 <%= link_to 'NEW', new_path, class: "button is-success" %>
 
 <%= render "flowers/flowers"%>
+
+</div>

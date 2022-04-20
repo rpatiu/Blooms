@@ -1,7 +1,7 @@
 <div class="block">
-  <div class="is-flex m-5">
+  <div class="columns m-5 is-desktop">
   <% @flowers.each do |f|%>
-    <div class="column is-one-fifth">
+    <div class="column">
     <%= link_to f do %>
               <div class="card">
                           <div class="card-image">
@@ -13,15 +13,15 @@
                                       <div class="media">
                                                   <div class="media-left">
                                                   <% if f.sale_price.present? %>
-                                                    <p class="title is-4 has-text-red">$<%= f.sale_price %></p>
-                                                    <p class="title is-6"><strike>$<%= f.price %></strike></p>
+                                                    <p class="title is-4" style="color: #FF7575">$<%= f.sale_price %></p>
+                                                    <p class="title is-6" style="color: #FF7575"><strike>$<%= f.price %></strike></p>
                                                   <% else %>
                                                     <p class="title is-4">$<%= f.price %></p>
                                                   <% end %>
                                                   </div>
                                                     <div class="media-content">
                                                       <p class="title is-5"><%= f.name %></p>
-                                                      <p class="subtitle is-6"><%= f.category.name %></p>
+                                                      <p class="subtitle is-6" style="font-family: Playfair Display"><%= (f.category.name).upcase %></p>
                                                     </div>
                                       </div>
 
@@ -29,16 +29,16 @@
                           </div>
               </div>
     <% end %>
-                              <div>
+                              <div class="card">
 
                                 <% if cart.include?(f) %>
-                                  <%= button_to cart_path(f), class: "button is-danger", method: :delete do %>
+                                  <%= button_to cart_path(f), class: "button is-danger", style: "width: 100%", method: :delete do %>
                                     Remove from cart
                                   <% end %>
                                 <% else %>
                                   <%= form_with url: cart_index_path, method: :post do %>
                                     <%= hidden_field_tag(:id, f.id) %>
-                                    <%= button_tag 'Add to Cart', class: "button is-info" %>
+                                    <%= button_tag 'Add to Cart', class: "button is-info is-responsive", style: "width: 100%" %>
                                   <% end %>
 
                                 <% end %>
@@ -49,6 +49,6 @@
   </div>
 </div>
 
-<div class="block">
+<div class="block mx-5">
   <%= paginate @flowers %>
 </div>

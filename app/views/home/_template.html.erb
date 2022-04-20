@@ -1,0 +1,28 @@
+<div class="columns">
+    <p class="subtitle is-2 m-auto" style="font-family: Dancing Script">Know what you're looking for? </p>
+
+    <div  class="is-active m-auto">
+      <div class="m-auto">
+          <div class="field has-addons has-addons-centered">
+            <%= form_with(url: search_flowers_path, method: :get, local: true) do %>
+            <div class="field has-addons has-addons-right">
+              <p class="control">
+              <% categories_array = Category.all.map { |s| [s.name.capitalize, s.id]}%>
+              <% categories_array.unshift(["All", "all"])%>
+                <span class="select">
+                  <%= select_tag(:type, options_for_select(categories_array, selected: "All"))%>
+                </span>
+              </p>
+              <p class="control">
+                <%= text_field_tag(:searchwords, nil, class: "input", placeholder: 'ex. Roses, Tulips') %>
+              </p>
+              <p class="control">
+                <%= submit_tag("Search", class: "button is-light", style: "background-color: #A79BAE; color: white")%>
+              </p>
+            </div>
+
+            <% end %>
+            </div>
+        </div>
+      </div>
+</div>
