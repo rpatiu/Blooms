@@ -76,7 +76,7 @@
 
   </div>
 
-<%= form_with url: cart_path, method: :post do %>
+<%= form_with url: cart_checkout_path, method: :post do %>
   <%= hidden_field_tag(:subtotal, subtotal) %>
   <%= hidden_field_tag(:total, total)%>
   <%= hidden_field_tag(:hst, hst)%>

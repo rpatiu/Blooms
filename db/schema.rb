@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_11_180624) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_20_003640) do
   create_table "abouts", force: :cascade do |t|
     t.text "description"
     t.datetime "created_at", null: false
@@ -129,6 +129,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_11_180624) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "provinces", force: :cascade do |t|
@@ -162,5 +164,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_11_180624) do
   add_foreign_key "cart_items", "orders"
   add_foreign_key "customers", "provinces"
   add_foreign_key "flowers", "categories"
+  add_foreign_key "orders", "users"
   add_foreign_key "users", "provinces"
 end

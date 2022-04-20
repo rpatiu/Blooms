@@ -49,13 +49,14 @@ class CartController < ApplicationController
     status = "paid"
 
     if user_signed_in?
-      order = current_user.Orders.create(
+      order = Order.create(
         subtotal: subtotal,
         pst:      pst,
         gst:      gst,
         hst:      hst,
         status:   status,
-        total:    total
+        total:    total,
+        user:     current_user
       )
 
       if order && order.valid?
@@ -66,18 +67,19 @@ class CartController < ApplicationController
             price = flower.sale_price
           end
 
-          cart_item = Order.CartItems.create(
+          cart_items = order.cart_items.create(
             price: price,
             quantity: quantity,
             flower_id: id
           )
 
         end
+
         session[:shopping_cart].clear
       end
 
       flash[:notice] = "Order Completed!"
-
+      redirect_to home_index_path
     else
       redirect_to new_user_session_path
     end
