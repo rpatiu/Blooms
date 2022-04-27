@@ -10,10 +10,11 @@
               <div class="column has-text-centered">
                   <%= image_tag(item.flower.image, alt: item.flower.name, style: "width: 100%")%>
               </div>
-              <div class="column">
+              <div class="column m-auto">
                 <div class="content m-1 has-text-centered">
                   <h2 class="title is-4" ><%= item.flower.name %></h2>
                     <h3 class="subtitle is-5">$<%= item.price%></h3>
+                    <h4 class="subtitle is-6">Qty: <%= item.quantity%></h4>
                 </div>
 
               </div>
@@ -38,7 +39,9 @@
       <p><%= f.flower.name %></p>
       <p class="has-text-right">
         <%= number_to_currency(f.price) %>
+        <% if f.quantity > 1 %>
          x <%= f.quantity %>
+        <% end %>
       </p>
     </div>
     <% end %>

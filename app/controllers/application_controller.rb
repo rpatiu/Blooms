@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def initialize_session
-    session[:shopping_cart] ||= {} #empty array of product IDs
+    session[:shopping_cart] ||= {}
   end
 
   def cart

@@ -32,7 +32,7 @@
                                   <% end %>
                                 <% else %>
                                   <%= form_with url: cart_index_path, method: :post do %>
-                                    <%= hidden_field_tag :id, flower.id, :id => Random.rand  %>
+                                    <%= hidden_field_tag :id, @flower.id, :id => Random.rand  %>
                                     <%= button_tag 'Add to Cart', class: "button is-info is-responsive", style: "width: 100%" %>
                                   <% end %>
 
